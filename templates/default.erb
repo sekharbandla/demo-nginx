@@ -1,0 +1,8 @@
+server {
+        listen <%= node['demo-nginx']['listen'] %>;
+ location / {
+       proxy_pass "<%= node['demo-nginx']['proxypass'] %>";
+        }
+}
+~
+

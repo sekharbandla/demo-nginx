@@ -1,0 +1,7 @@
+DEPENDENCIES
+  demo-nginx
+    path: .
+    metadata: true
+
+GRAPH
+  demo-nginx (0.1.0)

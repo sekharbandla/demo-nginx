@@ -1,0 +1,66 @@
+---
+driver:
+
+  name: ec2
+
+  region: us-west-2
+
+  subnet_id: subnet-dd6a1bbb
+
+  security_group_ids: ["sg-5f7d7f22"]
+
+  aws_ssh_key_id: keypair-lin
+
+  iam_profile_name: s3accesstoec2  
+
+  use_iam_profile: true
+
+  associate_public_ip: true
+
+  tags:
+
+    Owner: nikhil.linga
+
+    Environment: Testing
+
+    Project: reanLearning
+
+    ExpirationDate: 2017/11/30
+
+#provisioner:
+#	name: chef_solo
+transport:
+
+  ssh_key: /home/ubuntu/keypair-lin.pem
+
+  username: ubuntu
+
+verifier:
+
+  name: inspec
+
+platforms:
+
+  # Ubuntu xenial
+
+  - name: ubuntu-16.04  
+
+    driver:
+
+      instance_type: t2.micro
+
+      image_id: ami-0a00ce72
+
+      tags:
+
+        Name: nginx-kitchen 
+
+
+suites:
+  - name: default
+    run_list:
+      - recipe[demo-nginx::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default/default_test.rb
+    attributes:

@@ -1,7 +1,8 @@
 server {
         listen <%= node['demo-nginx']['listen'] %>;
+        server_name <%=node['demo-nginx']['nginx-privateip']>;
  location / {
-       proxy_pass "<%= node['demo-nginx']['proxypass'] %>";
+       proxy_pass http://<%= node['demo-nginx']['proxypass'] %>:8080;
         }
 }
 
